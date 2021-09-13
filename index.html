@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="style.css" rel="stylesheet" />
+	<title>Тестовое Задание</title>
+</head>
+
+<body>
+	<div id="tableContent">
+		<h1 id="toEdit">Тестовая работа Антоневича Георгия Сергеевича для Infotecs</h1><br>
+		<div id="spanInfo">
+			<p id="infoContentText">
+			<h3>Краткое руководство по работе с Таблицей</h3><br>
+			<ol>
+				<li>Сортировка таблицы предусмотрена<br>
+					<b>Для того чтобы отсортировать таблицу, нажмите на любой нужный столбец 1 раз</b><br>
+					<b>Для сортировки в обратную сторону нажмите на тот же столбец два раза</b>
+				</li>
+				<li>Предусмотрено редактирование любой ячейки Таблицы<br>
+					<b>Для того чтобы отредактировать таблицу нажмите на любую ячейку Дважды!(шапка не
+						редактируется)</b><br>
+					<b>Чтобы выйти из редактирования, нажмите внутрь Div контейнера, чтобы появилась<br>
+						печатная строка, потом нажмите на любое поле на странице Html 1 раз.</b>
+				</li>
+				<li>Для того чтобы скрыть/показать столбец, в таблице предусмотрены кнопки<br>
+					Каждая кнопка названа по номеру столбца.<br>
+					<b>Нажмите один раз на кнопку нужного столбца чтобы его скрыть<br></b>
+					<b>Нажмите на кнопку скрытого столбца Дважды!Чтобы столбец снова появился<br></b>
+				</li>
+			</ol>
+			</p>
+			<br>
+			<br>
+		</div>
+		<div id="buttonContentBox">
+			<div class="buttonShowColumn"><button type="checkbox" onclick="showhide(0, this)"
+					onDblClick="showhide1(0,this)" checked="checked">1 Столбец</button></div>
+			<div class="buttonShowColumn"><button type="checkbox" onclick="showhide(1, this)"
+					onDblClick="showhide1(1,this)" checked="checked">2 Столбец</button></div>
+			<div class="buttonShowColumn"><button type="checkbox" onclick="showhide(2, this)"
+					onDblClick="showhide1(2,this)" checked="checked">3 Столбец</button></div>
+			<div class="buttonShowColumn"><button type="checkbox" onclick="showhide(3, this)"
+					onDblClick="showhide1(3,this)" checked="checked">4 Столбец</button></div>
+			<div class="buttonShowColumn"><button type="checkbox" onclick="showhide(4, this)"
+					onDblClick="showhide1(4,this)" checked="checked">5 Столбец</button></div>
+		</div>
+		<br>
+		<script>
+			//Обходим массив json
+			let tableInfo = [
+				{
+					"id": "5c2286fb23e87be312d55d9a",
+					"name": {
+						"firstName": "Brooks",
+						"lastName": "Stone"
+					},
+					"phone": "+7 (843) 431-2190",
+					"about": "<p>Qui aliquip esse occaecat voluptate cillum laborum do adipisicing ea. <span id='showText'>...</span><span id='moreText'>Lorem dolor pariatur exercitation et Lorem voluptate reprehenderit. Culpa nisi sunt laborum culpa eu et nulla aute aliqua commodo cupidatat culpa. Eu laboris dolor enim officia mollit labore proident proident tempor ex minim magna dolor. Ipsum cillum officia irure amet enim voluptate consequat deserunt laborum nulla excepteur pariatur voluptate incididunt. In excepteur adipisicing dolor ea occaecat elit. Irure dolor quis cillum minim voluptate.</span></p><button onclick='showRead()' id='showBtn'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb7f4c26c63eff1b66",
+					"name": {
+						"firstName": "Johnston",
+						"lastName": "Tate"
+					},
+					"phone": "+7 (939) 409-2841",
+					"about": "<p>Eu ipsum est in exercitation voluptate occaecat fugiat fugiat ea elit ad veniam adipisicing ullamco.<span id='showText1'>...</span><span id='moreText1'> Laboris consectetur enim dolore amet exercitation sit non do reprehenderit non. Proident consequat anim non voluptate non culpa sit occaecat adipisicing. Reprehenderit dolor cillum laboris incididunt exercitation quis esse in ad ut voluptate commodo in. Exercitation veniam adipisicing irure ut qui nulla.</span></p><button onclick='showRead1()' id='showBtn1'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fb25005bd0905c04e1",
+					"name": {
+						"firstName": "Susie",
+						"lastName": "Newman"
+					},
+					"phone": "+7 (910) 551-3326",
+					"about": "<p>Non eiusmod minim ut anim qui non dolore veniam. Lorem veniam nostrud ullamco<span id='showText2'>...</span><span id='moreText2'> ad enim commodo incididunt amet ipsum irure. Minim sint tempor incididunt quis. Excepteur commodo mollit elit voluptate reprehenderit eiusmod ex nostrud dolor mollit. Culpa duis pariatur anim sunt in irure ex aliqua.</span></p><button onclick='showRead2()' id='showBtn2'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb982c7590025be630",
+					"name": {
+						"firstName": "Kelly",
+						"lastName": "Schwartz"
+					},
+					"phone": "+7 (977) 450-2369",
+					"about": "<p>Et commodo velit proident reprehenderit. In cillum adipisicing ut excepteur nostrud pariatur proident.<span id='showText3'>...</span><span id='moreText3'> Qui consectetur esse aliqua incididunt dolor esse ullamco cupidatat tempor mollit. Elit nulla eiusmod occaecat laborum laborum consequat eu nisi labore tempor aute. Dolor sunt anim reprehenderit non excepteur dolor consectetur eu.</span></p><button onclick='showRead3()' id='showBtn3'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fbc20c5d4618855c36",
+					"name": {
+						"firstName": "Chris",
+						"lastName": "Dorsey"
+					},
+					"phone": "+7 (886) 425-2696",
+					"about": "<p>Aliquip velit ut ex nisi officia proident. Eu anim elit deserunt exercitation officia tempor proident eu<span id='showText4'>...</span><span id='moreText4'> non incididunt aliqua. Lorem consequat commodo laborum minim ad consectetur. Sunt et anim dolor mollit tempor irure. Non fugiat anim laborum fugiat duis et culpa ea enim excepteur. Amet sint enim aliquip est.</span></p><button onclick='showRead4()' id='showBtn4'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb0d7c75cda0c18b33",
+					"name": {
+						"firstName": "Jimmie",
+						"lastName": "Gay"
+					},
+					"phone": "+7 (908) 513-3062",
+					"about": "<p>Nisi deserunt eu consectetur occaecat minim aliqua eu cupidatat ea. Esse consectetur deserunt nulla ullamco sit aute.<span id='showText5'>...</span><span id='moreText5'> Ad aliqua sint veniam enim exercitation in eiusmod ut aliqua consequat ipsum laborum. Aliqua excepteur non dolore adipisicing aliquip incididunt nostrud dolore consequat.</span></p><button onclick='showRead5()' id='showBtn5'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb49295e3d2caa2b19",
+					"name": {
+						"firstName": "Moon",
+						"lastName": "Ortiz"
+					},
+					"phone": "+7 (905) 447-3306",
+					"about": "<p>Eiusmod amet commodo sit nulla velit eu eiusmod. Fugiat proident sunt fugiat nostrud occaecat velit qui. Ea aute culpa<span id='showText6'>...</span><span id='moreText6'> irure excepteur esse. Laborum esse in enim aliqua proident ea cupidatat enim ea enim exercitation ullamco. Aliquip culpa enim et tempor elit enim quis sint ea.</span></p><button onclick='showRead6()' id='showBtn6'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fbb2ad79f1f40500d3",
+					"name": {
+						"firstName": "Beach",
+						"lastName": "Lindsey"
+					},
+					"phone": "+7 (981) 438-3607",
+					"about": "<p>Laborum pariatur fugiat ut fugiat nulla ad nostrud minim nulla do do occaecat labore. Incididunt exercitation nulla ea sint<span id='showText7'>...</span><span id='moreText7'> quis excepteur reprehenderit. Amet ea tempor dolor incididunt aliqua reprehenderit laborum excepteur consectetur consequat minim ea. Velit labore ex non reprehenderit. Dolor laboris voluptate sit adipisicing ad officia tempor aliqua eu. Aliqua do cupidatat veniam nulla. Aliqua minim tempor non eu commodo quis ex.</span></p><button onclick='showRead7()' id='showBtn7'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb25a61a6ff446ab4f",
+					"name": {
+						"firstName": "Gilbert",
+						"lastName": "Sanford"
+					},
+					"phone": "+7 (891) 579-2502",
+					"about": "<p>Cupidatat veniam occaecat deserunt ullamco do magna ex voluptate exercitation irure.<span id='showText8'>...</span><span id='moreText8'> Proident ea officia laboris nulla eu fugiat aliqua veniam duis exercitation aute anim velit. Minim nulla amet id mollit reprehenderit id. Duis ullamco occaecat mollit excepteur adipisicing nostrud velit exercitation quis veniam commodo aliquip veniam. Mollit sunt culpa nulla excepteur adipisicing do ut fugiat. Mollit elit pariatur esse ea officia mollit exercitation.</span></p><button onclick='showRead8()' id='showBtn8'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fbfb41f12cd0bc3fb2",
+					"name": {
+						"firstName": "Julie",
+						"lastName": "Shepherd"
+					},
+					"phone": "+7 (944) 442-3173",
+					"about": "<p>Excepteur quis exercitation sint officia commodo commodo aliquip ex exercitation laborum quis qui.<span id='showText9'>...</span><span id='moreText9'> Reprehenderit aliqua dolore aliqua est veniam et. Cupidatat sint ea ex consectetur eu aliqua cillum velit nulla ipsum fugiat qui ad.</span></p><button onclick='showRead9()' id='showBtn9'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fbd9e655815bd489d2",
+					"name": {
+						"firstName": "Callie",
+						"lastName": "Ford"
+					},
+					"phone": "+7 (998) 563-3808",
+					"about": "<p>Ea elit veniam laborum adipisicing. Lorem consequat magna ea et aliqua duis in mollit<span id='showText10'>...</span><span id='moreText10'> ea commodo officia amet et. Amet eu cupidatat proident commodo ex exercitation est voluptate mollit laborum et tempor duis nisi. Qui cupidatat adipisicing enim irure enim elit ullamco.</span></p><button onclick='showRead10()' id='showBtn10'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fbbabce0ea304e7b70",
+					"name": {
+						"firstName": "Beatriz",
+						"lastName": "Lancaster"
+					},
+					"phone": "+7 (812) 472-3455",
+					"about": "<p>Cillum quis incididunt aute laboris ad ad irure laborum fugiat nostrud.<span id='showText11'>...</span><span id='moreText11'> Ad aute sint duis excepteur ut officia. Qui consequat incididunt magna incididunt anim sunt cillum dolor incididunt veniam nulla elit id. Ullamco eu in tempor laborum sunt consectetur cupidatat ex amet Lorem reprehenderit in. Exercitation laborum labore minim ad. Occaecat culpa amet aute cupidatat nostrud excepteur.</span></p><button onclick='showRead11()' id='showBtn11'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb639d7dbcc0cae9e6",
+					"name": {
+						"firstName": "Johnnie",
+						"lastName": "Knowles"
+					},
+					"phone": "+7 (995) 488-2804",
+					"about": "<p>In esse exercitation tempor proident nulla est amet ut.<span id='showText12'>...</span><span id='moreText12'> Enim pariatur do laboris dolor Lorem amet ullamco eiusmod aliqua excepteur elit nisi. Adipisicing deserunt cupidatat in reprehenderit adipisicing proident deserunt. Elit adipisicing officia excepteur magna magna officia incididunt minim irure pariatur. Aliquip culpa do ullamco labore aliqua minim reprehenderit magna esse Lorem culpa. Consequat elit labore irure cupidatat id qui pariatur deserunt non consequat eiusmod et minim amet.</span></p><button onclick='showRead12()' id='showBtn12'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb5d734a18b3163fc8",
+					"name": {
+						"firstName": "Finley",
+						"lastName": "Watts"
+					},
+					"phone": "+7 (928) 472-2012",
+					"about": "<p>Occaecat in velit ullamco ad mollit ea nisi mollit sit esse consectetur exercitation reprehenderit.<span id='showText13'>...</span><span id='moreText13'> Labore cupidatat voluptate quis ipsum esse excepteur. Enim sunt officia culpa Lorem ipsum voluptate id aliquip. Aute nostrud consectetur consectetur quis aute quis exercitation aliqua elit magna.</span></p><button onclick='showRead13()' id='showBtn13'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb54624961f84b6607",
+					"name": {
+						"firstName": "Brady",
+						"lastName": "Trevino"
+					},
+					"phone": "+7 (954) 435-2361",
+					"about": "<p>In sunt non reprehenderit Lorem sit exercitation anim eiusmod irure. Non anim Lorem <span id='showText14'>...</span><span id='moreText14'> nulla in culpa non pariatur nulla in Lorem enim sit. Sunt pariatur deserunt occaecat ut. Nostrud enim laborum pariatur Lorem voluptate reprehenderit do aute officia veniam. Duis laborum et ea laboris elit consectetur id enim enim nisi consequat. Tempor occaecat culpa qui ipsum nisi fugiat nisi sit esse ea. Culpa est nisi Lorem officia commodo minim ullamco cupidatat nisi irure.</span></p><button onclick='showRead14()' id='showBtn14'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fb5c2ac3cd9312946c",
+					"name": {
+						"firstName": "Vanessa",
+						"lastName": "Lowe"
+					},
+					"phone": "+7 (804) 563-2180",
+					"about": "<p>Reprehenderit magna esse tempor dolor deserunt veniam officia ullamco ipsum. <span id='showText15'>...</span><span id='moreText15'> Officia nostrud dolore fugiat amet reprehenderit sint velit est nisi exercitation in et. Aliqua quis nisi duis minim. Exercitation pariatur officia aliquip do anim nisi nisi dolor pariatur consectetur ea.</span></p><button onclick='showRead15()' id='showBtn15'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fbad86e5926e025b52",
+					"name": {
+						"firstName": "Maricela",
+						"lastName": "Roberson"
+					},
+					"phone": "+7 (937) 471-3638",
+					"about": "<p>Duis cupidatat qui nulla ea elit enim est incididunt aute consequat fugiat minim non sint. <span id='showText16'>...</span><span id='moreText16'> Id ipsum exercitation minim minim aute. Minim magna aliquip adipisicing in fugiat aliquip duis proident.</span></p><button onclick='showRead16()' id='showBtn16'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fbe9146dab0289ee25",
+					"name": {
+						"firstName": "Marva",
+						"lastName": "Ray"
+					},
+					"phone": "+7 (930) 439-2652",
+					"about": "<p>Non aliqua cupidatat quis adipisicing non consequat. Nulla eiusmod sint minim aliqua sint<span id='showText17'>...</span><span id='moreText17'> nostrud occaecat nisi incididunt. Dolor exercitation enim elit nisi aute cillum proident duis fugiat do ex excepteur. Deserunt fugiat est laborum esse veniam. Magna ipsum ea incididunt proident.</span></p><button onclick='showRead17()' id='showBtn17'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb6ed4e8c39e8f549c",
+					"name": {
+						"firstName": "Mcclure",
+						"lastName": "Melendez"
+					},
+					"phone": "+7 (946) 407-3558",
+					"about": "<p>Exercitation aliqua id cillum laborum amet officia et. Est ad nulla do incididunt consequat <span id='showText18'>...</span><span id='moreText18'> officia laborum magna laboris. Incididunt est voluptate voluptate non est ipsum commodo enim voluptate mollit sit ullamco aliquip ea. Eiusmod incididunt ea occaecat incididunt adipisicing eiusmod deserunt elit reprehenderit. Est nulla minim commodo quis id irure proident do magna aliqua culpa aute cillum reprehenderit. Incididunt nulla Lorem officia veniam sunt culpa. Proident sunt sint incididunt non voluptate consequat amet elit ea ut incididunt dolore.</span></p><button onclick='showRead18()' id='showBtn18'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fb42cbbcf764de06c8",
+					"name": {
+						"firstName": "Vasquez",
+						"lastName": "Manning"
+					},
+					"phone": "+7 (970) 405-2316",
+					"about": "<p>Sunt mollit anim nulla consequat. Commodo laborum Lorem labore sunt pariatur consequat velit ad.<span id='showText19'>...</span><span id='moreText19'> Pariatur aute Lorem dolor cillum dolore sit ut. Deserunt excepteur elit do qui ex anim pariatur pariatur dolor eu laborum cillum ipsum veniam. Nisi dolore ipsum irure magna do amet ex esse in laboris aliqua ullamco fugiat cupidatat. Consequat tempor velit consectetur consequat enim do Lorem adipisicing tempor laboris. Mollit officia cupidatat veniam duis minim cillum nostrud incididunt ullamco ad incididunt enim est.</span></p><button onclick='showRead19()' id='showBtn19'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb03b63d22fad39e10",
+					"name": {
+						"firstName": "Hawkins",
+						"lastName": "Hopkins"
+					},
+					"phone": "+7 (837) 542-3177",
+					"about": "<p>Fugiat aliqua esse eu quis velit nulla fugiat id reprehenderit sint<span id='showText20'>...</span><span id='moreText20'> non irure ea enim. Elit laborum sunt esse occaecat aliqua veniam dolore nostrud dolore. Eiusmod et commodo dolor exercitation Lorem consectetur qui sint eu. Culpa magna ut consequat Lorem nisi proident nisi irure adipisicing laboris velit dolore Lorem.</span></p><button onclick='showRead20()' id='showBtn20'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb88b8cf12c9a35aca",
+					"name": {
+						"firstName": "Angelina",
+						"lastName": "Gillespie"
+					},
+					"phone": "+7 (868) 520-3317",
+					"about": "<p>Est esse deserunt laborum sint sunt occaecat cupidatat enim. Duis aliqua<span id='showText21'>...</span><span id='moreText21'> officia cupidatat cupidatat. Eu enim elit eu magna proident est veniam. Pariatur proident elit in aliqua ad consectetur proident nostrud anim reprehenderit.</span></p><button onclick='showRead21()' id='showBtn21'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb73c192df1d6cf949",
+					"name": {
+						"firstName": "Meghan",
+						"lastName": "Robbins"
+					},
+					"phone": "+7 (967) 457-3538",
+					"about": "<p>Lorem nostrud aute incididunt proident non laboris esse non do excepteur.<span id='showText22'>...</span><span id='moreText22'> Sint mollit consequat enim minim quis laborum ad cupidatat aliquip minim duis. Sunt excepteur id esse voluptate.</span></p><button onclick='showRead22()' id='showBtn22'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fb8ab95671e3765259",
+					"name": {
+						"firstName": "Malone",
+						"lastName": "Mack"
+					},
+					"phone": "+7 (843) 581-2406",
+					"about": "<p>Esse nostrud voluptate commodo commodo ad consectetur aliquip tempor<span id='showText23'>...</span><span id='moreText23'> velit veniam ex. Culpa reprehenderit pariatur aliqua in occaecat cillum esse laboris enim exercitation ex minim. Labore non sint deserunt id. Et deserunt id anim magna amet. Non ipsum commodo commodo sint nostrud dolore et veniam elit ad. Est dolor non ad id enim ut laborum do consectetur id officia. Exercitation cillum occaecat eiusmod exercitation.</span></p><button onclick='showRead23()' id='showBtn23'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fba5bd3d862ac4d7e0",
+					"name": {
+						"firstName": "Eula",
+						"lastName": "Aguirre"
+					},
+					"phone": "+7 (886) 422-2720",
+					"about": "<p>Consectetur do cupidatat reprehenderit nulla anim dolore anim voluptate<span id='showText24'>...</span><span id='moreText24'> esse non ex ullamco eu ea. Deserunt do irure ad incididunt ut. Minim pariatur ipsum quis ipsum reprehenderit exercitation voluptate ut occaecat labore amet. Nisi sit ex dolor nulla reprehenderit nulla ullamco sint aliqua. Ullamco non aliquip elit est eiusmod.</span></p><button onclick='showRead24()' id='showBtn24'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb4148f031437ee69c",
+					"name": {
+						"firstName": "Katy",
+						"lastName": "Church"
+					},
+					"phone": "+7 (860) 475-2861",
+					"about": "<p>Pariatur irure dolore excepteur commodo do id commodo ex sit nulla tempor<span id='showText25'>...</span><span id='moreText25'> fugiat dolor. Ad ullamco labore eiusmod laboris quis excepteur velit minim exercitation elit non irure. Occaecat voluptate nostrud cillum ea laboris exercitation consectetur ex. Incididunt nisi magna occaecat reprehenderit laboris esse. Laborum nulla fugiat sint incididunt. Deserunt quis ipsum aute eiusmod anim dolore sunt.</span></p><button onclick='showRead25()' id='showBtn25'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb49d38b81288fca71",
+					"name": {
+						"firstName": "Blanca",
+						"lastName": "Bradshaw"
+					},
+					"phone": "+7 (806) 457-2264",
+					"about": "<p>Dolore quis ex laborum anim tempor adipisicing Lorem pariatur reprehenderit<span id='showText26'>...</span><span id='moreText26'> commodo sit fugiat. Cillum consectetur ea reprehenderit anim. Dolor voluptate proident pariatur veniam reprehenderit aliqua nostrud.</span></p><button onclick='showRead26()' id='showBtn26'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fb0afb209b3bec8073",
+					"name": {
+						"firstName": "Kay",
+						"lastName": "William"
+					},
+					"phone": "+7 (914) 411-3009",
+					"about": "<p>Consequat eu fugiat id elit laborum do nulla Lorem nulla in laborum laborum.<span id='showText27'>...</span><span id='moreText27'> Sit officia nulla amet consequat commodo deserunt eu cupidatat labore nostrud nostrud. Cillum nulla cillum ad nostrud eiusmod elit esse tempor commodo proident nostrud occaecat reprehenderit. Excepteur in officia mollit in qui non aute in sunt sint Lorem eiusmod consequat.</span></p><button onclick='showRead27()' id='showBtn27'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fbbfc54c696f663211",
+					"name": {
+						"firstName": "Camacho",
+						"lastName": "Wells"
+					},
+					"phone": "+7 (946) 492-2660",
+					"about": "<p>Occaecat deserunt consequat deserunt officia ipsum ex. Nostrud officia in<span id='showText28'>...</span><span id='moreText28'> voluptate tempor velit nisi dolor cupidatat irure quis. Deserunt excepteur deserunt veniam exercitation ea cillum nostrud occaecat excepteur in ut veniam. Anim voluptate pariatur sunt consequat pariatur occaecat laborum nisi esse labore cupidatat. Do proident cillum consectetur enim Lorem voluptate proident.</span></p><button onclick='showRead28()' id='showBtn28'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fbb73f5c893d46dde2",
+					"name": {
+						"firstName": "Bradshaw",
+						"lastName": "Hodges"
+					},
+					"phone": "+7 (807) 586-3870",
+					"about": "<p>Ea quis sint magna amet nulla ut nostrud. Ea sunt do aliquip cupidatat pariatur<span id='showText29'>...</span><span id='moreText29'> officia ex laboris proident quis minim ea. Officia anim minim aliquip labore ex anim irure qui anim magna labore aliqua occaecat. Velit consequat duis culpa esse dolor. Duis non qui fugiat ex laboris.</span></p><button onclick='showRead29()' id='showBtn29'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb6072dd80f1d56c39",
+					"name": {
+						"firstName": "Rutledge",
+						"lastName": "Acosta"
+					},
+					"phone": "+7 (800) 574-3803",
+					"about": "<p>Dolore minim anim sint eu culpa et eu adipisicing nisi laborum laborum id qui<span id='showText30'>...</span><span id='moreText30'>veniam. Anim reprehenderit est dolor proident velit nisi. Anim eu elit enim laborum minim duis. Consequat et ipsum ex esse cillum excepteur commodo commodo irure sit proident. In deserunt nulla qui fugiat.</span></p><button onclick='showRead30()' id='showBtn30'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fbc750d871ffb16329",
+					"name": {
+						"firstName": "Cline",
+						"lastName": "Fitzpatrick"
+					},
+					"phone": "+7 (894) 563-2167",
+					"about": "<p>In incididunt reprehenderit quis do consequat duis et in. Ea mollit mollit nulla<span id='showText31'>...</span><span id='moreText31'> deserunt nulla commodo voluptate laboris cupidatat sit non. Sint eiusmod minim ut commodo sint. Quis in ea non consectetur do aliquip veniam aute.</span></p > <button onclick='showRead31()' id='showBtn31'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fb79bf32d653202f75",
+					"name": {
+						"firstName": "Sloan",
+						"lastName": "Dale"
+					},
+					"phone": "+7 (828) 575-3234",
+					"about": "<p>Laboris ut ullamco consequat nisi occaecat sint nisi. Commodo minim deserunt officia<span id='showText32'>...</span><span id='moreText32'> exercitation est aliquip pariatur et aliquip quis dolore deserunt esse. Eu consectetur elit do veniam sit.</span></p > <button onclick='showRead32()' id='showBtn32'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb81d27ce4dd8a84ae",
+					"name": {
+						"firstName": "Buckner",
+						"lastName": "Fowler"
+					},
+					"phone": "+7 (801) 600-3763",
+					"about": "<p>Est anim labore ea qui officia ea sunt dolor. Elit aliquip dolore amet nostrud qui<span id='showText33'>...</span><span id='moreText33'> cillum anim aute ut voluptate non non. Consectetur cillum velit elit sit dolore occaecat amet sunt mollit quis aute labore enim commodo. Minim eu in nisi mollit veniam aliquip fugiat duis nostrud deserunt incididunt duis.</span></p > <button onclick='showRead33()' id='showBtn33'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fbf5a16ef438aaa5fa",
+					"name": {
+						"firstName": "Hays",
+						"lastName": "Hurley"
+					},
+					"phone": "+7 (963) 481-2993",
+					"about": "<p>Consequat commodo anim est ex veniam dolor pariatur officia officia elit quis sint<span id='showText34'>...</span><span id='moreText34'> esse. Commodo consectetur esse enim mollit reprehenderit qui ad. Mollit magna ipsum et exercitation voluptate veniam adipisicing duis nisi dolore ad do quis tempor. Esse ea nisi cupidatat non elit velit anim nulla qui nisi commodo ullamco anim.</span></p > <button onclick='showRead34()' id='showBtn34'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fbab253d31546ba1ac",
+					"name": {
+						"firstName": "Ryan",
+						"lastName": "Case"
+					},
+					"phone": "+7 (847) 466-2653",
+					"about": "<p>Excepteur quis dolor qui laborum anim anim cupidatat culpa esse sunt excepteur.<span id='showText35'>...</span><span id='moreText35'> Incididunt elit nostrud excepteur anim nostrud sit veniam deserunt sunt id ipsum labore aute dolor. Est culpa in do ea Lorem fugiat cillum reprehenderit. Consectetur cupidatat irure adipisicing dolore voluptate sit ex. Exercitation in tempor duis ea irure nisi minim velit ipsum irure. Cillum ullamco cillum commodo fugiat mollit.</span></p > <button onclick='showRead35()' id='showBtn35'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fb63577dc573f8a927",
+					"name": {
+						"firstName": "Tameka",
+						"lastName": "Walls"
+					},
+					"phone": "+7 (984) 523-3641",
+					"about": "<p>Aliqua tempor do tempor Lorem laborum ut consectetur commodo velit magna non<span id='showText36'>...</span><span id='moreText36'> deserunt quis. Eu et cupidatat pariatur amet laborum amet officia eu voluptate ad adipisicing. Occaecat nisi Lorem esse commodo dolore tempor dolore exercitation ea sint labore. Do proident id quis ex do consequat non eiusmod consequat pariatur nostrud. Ad id adipisicing reprehenderit sit amet fugiat in eiusmod sunt incididunt laboris.</span></p > <button onclick='showRead36()' id='showBtn36'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fb82222dbb58fb241c",
+					"name": {
+						"firstName": "Diane",
+						"lastName": "Pruitt"
+					},
+					"phone": "+7 (959) 464-3535",
+					"about": "<p>Occaecat ad reprehenderit aute quis culpa anim tempor officia. Fugiat laboris<span id='showText37'>...</span><span id='moreText37'> et nostrud veniam aliquip. Ut nulla culpa quis anim sunt aliquip. Proident esse incididunt do commodo est non ea dolor nisi adipisicing quis id exercitation. Nisi eu do pariatur id officia nostrud culpa amet. Anim duis anim aute amet pariatur irure anim deserunt irure sit proident sunt exercitation. Culpa nisi excepteur id laborum occaecat esse occaecat laborum aliquip non non.</span></p > <button onclick='showRead37()' id='showBtn37'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb1802a0ecd0aa6873",
+					"name": {
+						"firstName": "Mccullough",
+						"lastName": "Sullivan"
+					},
+					"phone": "+7 (953) 553-3215",
+					"about": "<p>Velit ipsum elit amet aute incididunt culpa occaecat dolore cillum esse quis<span id='showText38'>...</span><span id='moreText38'> magna veniam. Elit ipsum cupidatat irure Lorem minim nulla deserunt. Incididunt officia esse Lorem cillum sint qui amet esse est.</span></p > <button onclick='showRead38()' id='showBtn38'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fb02d305780e20521b",
+					"name": {
+						"firstName": "Fay",
+						"lastName": "Burgess"
+					},
+					"phone": "+7 (935) 563-3787",
+					"about": "<p>Occaecat non nisi nisi qui minim eiusmod aute ullamco culpa aliquip ut irure.<span id='showText39'>...</span><span id='moreText39'> Culpa sit exercitation dolore ullamco velit proident incididunt. Amet aliqua adipisicing cillum sint cupidatat ullamco cillum aute eiusmod ex. Adipisicing reprehenderit proident nulla commodo mollit tempor eiusmod nulla eiusmod. Non commodo amet reprehenderit aute. Officia voluptate in adipisicing nostrud pariatur in. Labore commodo do commodo excepteur nostrud ea occaecat ullamco pariatur veniam excepteur aliquip fugiat amet.</span></p > <button onclick='showRead39()' id='showBtn39'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fbe330f035ee90c0db",
+					"name": {
+						"firstName": "Kasey",
+						"lastName": "Joyner"
+					},
+					"phone": "+7 (998) 497-2317",
+					"about": "<p>Dolor aliqua quis nulla fugiat enim cillum aute excepteur. Qui qui commodo<span id='showText40'>...</span><span id='moreText40'> ipsum deserunt velit fugiat ex ipsum Lorem velit. Veniam veniam aliquip commodo adipisicing officia sint ut dolor et. Fugiat consequat ad nulla nostrud aliqua Lorem. Sit tempor ut esse non nisi officia qui consectetur velit adipisicing sit excepteur cupidatat.</span></p > <button onclick='showRead40()' id='showBtn40'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBlue'>blue</p>"
+				},
+				{
+					"id": "5c2286fbf21aa796126a9505",
+					"name": {
+						"firstName": "Delia",
+						"lastName": "Kline"
+					},
+					"phone": "+7 (901) 562-2975",
+					"about": "<p>Nulla esse sunt aute reprehenderit aliqua nisi eiusmod dolor. Excepteur consequat<span id='showText41'>...</span><span id='moreText41'> nisi ea ex velit et officia voluptate. Qui culpa mollit culpa ut enim non laborum in amet. Id aute cupidatat magna ipsum consequat magna officia velit.</span></p > <button onclick='showRead41()' id='showBtn41'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fb771275c314fa32d2",
+					"name": {
+						"firstName": "Finch",
+						"lastName": "Keller"
+					},
+					"phone": "+7 (845) 599-3611",
+					"about": "<p>Proident nostrud voluptate incididunt nostrud Lorem cillum voluptate cillum ipsum<span id='showText42'>...</span><span id='moreText42'> duis irure. Ut exercitation aliquip ullamco laboris sunt incididunt magna est ipsum cillum. Dolor exercitation ullamco dolor anim et mollit ex proident amet Lorem proident laboris enim. Tempor laboris dolore anim anim officia voluptate exercitation sint eiusmod. Pariatur ex laborum nulla adipisicing ex cupidatat ea officia duis aute. Do anim velit dolor ad quis occaecat id.</span></p > <button onclick='showRead42()' id='showBtn42'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorGreen'>green</p>"
+				},
+				{
+					"id": "5c2286fb166f6243646aa197",
+					"name": {
+						"firstName": "Yang",
+						"lastName": "Reeves"
+					},
+					"phone": "+7 (976) 457-2144",
+					"about": "<p>Fugiat deserunt veniam incididunt cillum irure nulla esse. Minim ut dolor in consequat<span id='showText43'>...</span><span id='moreText43'> anim incididunt. Consequat incididunt culpa enim laborum et ipsum.</span></p > <button onclick='showRead43()' id='showBtn43'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fbec1ed6670a8e3fce",
+					"name": {
+						"firstName": "Mayer",
+						"lastName": "Boyd"
+					},
+					"phone": "+7 (811) 462-2191",
+					"about": "<p>Dolor enim ad aliquip cupidatat ut voluptate voluptate Lorem proident dolore.<span id='showText44'>...</span><span id='moreText44'> Anim id ullamco consequat aliqua ut voluptate et ea minim officia. Dolor ex irure sint Lorem ad tempor duis. Sit ullamco ullamco eu esse cupidatat ut culpa ut. Reprehenderit ex proident do esse labore fugiat non Lorem exercitation excepteur ex et. Mollit in aliqua nostrud irure ipsum ad cupidatat eu aliqua ut officia. Est Lorem ut do et duis irure velit ipsum ullamco duis.</span></p > <button onclick='showRead44()' id='showBtn44'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fb8e5edeca325590ee",
+					"name": {
+						"firstName": "Molly",
+						"lastName": "Gentry"
+					},
+					"phone": "+7 (987) 526-2754",
+					"about": "<p>Do aliquip occaecat labore excepteur officia. Tempor Lorem ipsum qui enim non<span id='showText45'>...</span><span id='moreText45'> et quis velit. Commodo ut commodo aliqua proident irure minim non adipisicing id dolore. Veniam voluptate esse nostrud ut anim ea. Do dolor id quis commodo eiusmod aliquip in ex duis fugiat proident amet ad. Excepteur fugiat occaecat ad Lorem esse est quis pariatur aliqua amet sunt consequat consectetur. Pariatur laboris mollit ut sunt commodo aute quis velit fugiat qui nostrud consectetur qui consectetur.</span></p > <button onclick='showRead45()' id='showBtn45'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fbe2e14f332b2ec00d",
+					"name": {
+						"firstName": "Misty",
+						"lastName": "Fernandez"
+					},
+					"phone": "+7 (859) 510-3637",
+					"about": "<p>Velit est aliqua laboris ea commodo. Nisi adipisicing veniam deserunt excepteur<span id='showText46'>...</span><span id='moreText46'> do excepteur in sit ullamco do laborum minim ex. Qui dolor ullamco consectetur esse ut irure dolor cupidatat duis dolor eiusmod cupidatat.</span></p > <button onclick='showRead46()' id='showBtn46'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fbc0dd407398e1a2a1",
+					"name": {
+						"firstName": "George",
+						"lastName": "Yang"
+					},
+					"phone": "+7 (909) 426-3260",
+					"about": "<p>Officia aliquip consequat reprehenderit do aute Lorem in proident reprehenderit <span id='showText47'>...</span><span id='moreText47'>ad ullamco eiusmod esse consectetur. Eu fugiat Lorem ullamco irure minim pariatur aliqua magna mollit non eu exercitation exercitation. Enim Lorem exercitation fugiat ad reprehenderit enim laborum qui. Id officia reprehenderit veniam nostrud officia laboris minim ad fugiat ex nulla dolor ut proident. Nulla consequat amet anim id eiusmod minim.</span></p > <button onclick='showRead47()' id='showBtn47'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				},
+				{
+					"id": "5c2286fbaee7a091b9ead63f",
+					"name": {
+						"firstName": "Lucille",
+						"lastName": "Clark"
+					},
+					"phone": "+7 (972) 469-3368",
+					"about": "<p>Irure ex exercitation et dolore. Quis duis dolor quis do deserunt voluptate.<span id='showText48'>...</span><span id='moreText48'> Aliquip commodo sunt consequat non consectetur anim qui voluptate commodo culpa. Laborum mollit tempor adipisicing ad do mollit dolor ex veniam in quis exercitation. Consectetur consectetur incididunt pariatur sunt dolore. Consequat ullamco consectetur sunt proident sunt excepteur pariatur dolor magna ut esse tempor.</span></p > <button onclick='showRead48()' id='showBtn48'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorRed'>red</p>"
+				},
+				{
+					"id": "5c2286fb7761161aac35caaa",
+					"name": {
+						"firstName": "Leblanc",
+						"lastName": "Monroe"
+					},
+					"phone": "+7 (950) 498-3212",
+					"about": "<p>Nulla consectetur laboris nisi labore laboris reprehenderit. Deserunt aute pariatur<span id='showText49'>...</span><span id='moreText49'> nostrud tempor amet ad pariatur et ipsum cupidatat nostrud. Elit irure labore nostrud et reprehenderit enim. Deserunt sint magna sunt ex commodo nostrud adipisicing et laborum est amet.</span></p > <button onclick='showRead49()' id='showBtn49'>Читать больше</button>",
+					"eyeColor": "<p class='eyeColorBrown'>brown</p>"
+				}
+			]
+			//Функция пишет таблицу и записывает массив данных в нее
+			let tableText = tableInfo.length;
+			let table = document.createElement("table");
+			table.setAttribute("border", "1");
+			table.setAttribute("color", '000');
+			table.setAttribute("width", "1200");
+			let tbody = document.createElement("tbody");
+			let tr = document.createElement("tr");
+			tr.innerHTML = "<tr><th onClick='fSort()' onDblClick='fSort1()'>Name</th><th onClick='fSort()' onDblClick='fSort1()'>Phone</th><th onClick='fSort()' onDblClick='fSort1()'>About</th><th onClick='fSort()' onDblClick='fSort1()'>Eye Color</th><th onClick='fSort()' onDblClick='fSort1()'>ID</th></tr>";
+			tbody.appendChild(tr);
+			let tableName = ["name", "phone", "about", "eyeColor", "id"], name = "firstName";
+			for (let i = 0; i < tableText; i++) {
+				let tr = document.createElement("tr");
+				for (let j = 0; j < 5; j++) {
+					let td = document.createElement("td");
+					let info = tableInfo[i][tableName[j]];
+					td.innerHTML = info[name] ? info[name] : info;
+					tr.appendChild(td);
+				}
+				tbody.appendChild(tr);
+			}
+
+			table.appendChild(tbody);
+			document.getElementById("tableContent").appendChild(table);
+			table.id = "sort";
+		</script>
+
+
+		<!--Сортировка Таблицы-->
+		<script>
+			//Сортировка по клику в одну сторону
+
+			function fSort() {
+				let sortT = Array.from(table.rows);
+				sortT = sortT.slice(1);
+				sortT.sort((a, b) => {
+					let string = a.cells[0].textContent;
+					let string1 = b.cells[0].textContent;
+					return string.localeCompare(string1);
+				});
+				table.tBodies[0].append(...sortT);
+			}
+			//Обратная сортировка по дабл Клику
+
+			function fSort1() {
+				let sortT = Array.from(table.rows);
+				sortT = sortT.slice(1);
+				sortT.sort((a, b) => {
+					let string1 = b.cells[0].textContent;
+					let string = a.cells[0].textContent;
+					return string1.localeCompare(string);
+				});
+				table.tBodies[0].append(...sortT);
+			}
+
+		</script>
+
+		<!--Добавляем вывод построчный в ячейку about -->
+		<script src="app.js"></script>
+
+
+		<!--Добавляем возможность редактирования ячеек-->
+		<script src="main.js"></script>
+
+		<!--Цвет глаз Дополнительное задание-->
+		<script>
+			let eyeBackgroundColorBlue = document.getElementsByClassName("eyeColorBlue")
+			for (var i = 0; i < eyeBackgroundColorBlue.length; i++) {
+				eyeBackgroundColorBlue[i].style.backgroundColor = "blue";
+			}
+
+			let eyeBackgroundColorBrown = document.getElementsByClassName("eyeColorBrown")
+			for (var i = 0; i < eyeBackgroundColorBrown.length; i++) {
+				eyeBackgroundColorBrown[i].style.backgroundColor = "brown";
+			}
+
+			let eyeBackgroundColorRed = document.getElementsByClassName("eyeColorRed")
+			for (var i = 0; i < eyeBackgroundColorRed.length; i++) {
+				eyeBackgroundColorRed[i].style.backgroundColor = "red";
+			}
+
+			let eyeBackgroundColorGreen = document.getElementsByClassName("eyeColorGreen")
+			for (var i = 0; i < eyeBackgroundColorGreen.length; i++) {
+				eyeBackgroundColorGreen[i].style.backgroundColor = "green";
+			}
+		</script>
+
+		<!--Скрыть/показать столбец Дополнительное задание-->
+		<script>
+			//Скрыть Столбец по клику на кнопку
+			function showhide(column, elem) {
+				if (elem.checked)
+					dp = "table-cell";
+				else
+					dp = "none";
+				tds = document.getElementsByTagName('tr');
+				for (i = 0; i < tds.length; i++)
+					tds[i].childNodes[column].style.display = dp;
+			}
+			//Показать столбец дабл кликом на кнопку
+			function showhide1(column, elem) {
+				if (elem.checked)
+					dp = "table-cell";
+				else
+					dp = "";
+				tds = document.getElementsByTagName('tr');
+				for (i = 0; i < tds.length; i++)
+					tds[i].childNodes[column].style.display = dp;
+			}
+		</script>
+</body>
+
+</html>
